@@ -1,0 +1,16 @@
+Try these commands:
+
+apt-get install mysql-server
+apt-get install python-django
+apt-get install python-pip
+pip install fandjango
+
+cp settings_example.py settings.py
+# edit this
+
+mysql -u root -p
+mysql> CREATE DATABASE fbtools;
+
+python manage.py syncdb
+
+
