@@ -19,6 +19,7 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 FACEBOOK_APPLICATION_ID = '1231234123412341234'
 FACEBOOK_APPLICATION_SECRET_KEY = '1234567890abcdef'
 FACEBOOK_APPLICATION_NAMESPACE = 'mynamespace'
+FACEBOOK_APPLICATION_INITIAL_PERMISSIONS = ['user_photos', 'user_videos', 'friends_photos', 'friends_videos', 'read_stream']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
