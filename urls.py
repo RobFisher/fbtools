@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     # (r'^admin/', include(admin.site.urls)),
 
     (r'^fandjango/', include('fandjango.urls')),
+    (r'^photostream/', 'photostream.views.index'),
 )
 
