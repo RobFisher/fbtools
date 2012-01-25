@@ -1,9 +1,12 @@
 Try these commands:
 
 apt-get install mysql-server
-apt-get install python-django
 apt-get install python-pip
 pip install fandjango
+apt-get install python-setuptools
+easy_install django
+easy_install django-dajaxice
+easy_install django-dajax
 
 cp settings_example.py settings.py
 # edit this
