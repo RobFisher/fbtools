@@ -26,9 +26,8 @@ def get_photos(graph, user, since):
     get_photos_in_feed(feed)
 
 
-def get_friend_photos(graph):
+def get_friend_photos(friends):
     t = t_minus_two_days()
-    friends = graph.get('me/friends')
     for friend in friends['data']:
         get_photos(graph, friend['id'], t)
 
@@ -43,10 +42,10 @@ def get_num_photos(graph, num):
 @facebook_authorization_required
 def index(request):
     template = loader.get_template('index.html')
-    context = RequestContext(request, {
-            'fullname' : request.facebook.user.full_name,
-    })
-    print request.facebook.user.full_name
     graph = request.facebook.user.graph
-    get_friend_photos(graph)
+    friends = graph.get('me/friends')
+    numfriends = len(friends['data'])
+    context = RequestContext(request, {
+            'numfriends' : numfriends,
+    })
     return HttpResponse(template.render(context))

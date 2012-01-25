@@ -1,1 +1,30 @@
-<p>Hello again, {{ fullname }}!</p>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+{% load dajaxice_templatetags %}
+
+<html>
+<head>
+<title>PhotoStream</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+{% dajaxice_js_import %}
+<script src="{{ STATIC_URL }}jquery.dajax.core.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+function calculate(){
+	Dajaxice.fbtools.photostream.multiply(Dajax.process,{'a':$('#a').val(),'b':$ ('#b').val()})
+}
+</script>
+
+</head>
+
+<body>
+
+<p>Photos from your friends in the last 48 hours... <span id="numfriends">{{ numfriends }}</span> friends to go.</p>
+
+<input type="text" name="a" value="5" id="a"> x
+<input type="text" name="b" value="6" id="b"> =
+<input type="text" name="result" value="" id="result">
+<input type="button" name="caculate" value="Let's Multiply!" id="caculate" onclick="calculate()">
+
+</body>
+</html>
