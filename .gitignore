@@ -1,4 +1,6 @@
 settings.py
 *.pyc
 *~
+*#
+.#*
 
