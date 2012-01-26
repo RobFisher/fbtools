@@ -11,8 +11,39 @@
 
 <script type="text/javascript">
 function calculate(){
-	Dajaxice.fbtools.photostream.multiply(Dajax.process,{'a':$('#a').val(),'b':$ ('#b').val()})
+	Dajaxice.fbtools.photostream.multiply(Dajax.process,{'a':$('#a').val(),'b':$ ('#b').val()});
 }
+
+function document_ready_function() {
+    element = $('#photos');
+    element.append('<p>lets go...</p>');
+    Dajaxice.fbtools.photostream.fetch_friends_ids(Dajax.process);
+}
+
+var friend_ids = {}
+var friend_index = 0
+
+
+function update_friends_ids(data) {
+    element = $('#photos');
+    element.append('<p>so far so good...</p>');
+    friend_ids = data.id_list;
+    Dajaxice.fbtools.photostream.fetch_friend_photos(Dajax.process,{'friend_id':friend_ids[friend_index]});
+}
+
+
+function update_photos(data) {
+    element = $('#photos');
+    element.append(data.photos);
+    friend_index = friend_index + 1;
+    friends_to_go = friend_ids.length - friend_index;
+    $('#numfriends').html(friends_to_go);
+    if (friend_index < friend_ids.length) {
+        Dajaxice.fbtools.photostream.fetch_friend_photos(Dajax.process,{'friend_id':friend_ids[friend_index]});
+    }
+}
+
+$(document).ready(document_ready_function);
 </script>
 
 </head>
@@ -25,6 +56,8 @@ function calculate(){
 <input type="text" name="b" value="6" id="b"> =
 <input type="text" name="result" value="" id="result">
 <input type="button" name="caculate" value="Let's Multiply!" id="caculate" onclick="calculate()">
+
+<div id='photos'></div>
 
 </body>
 </html>
