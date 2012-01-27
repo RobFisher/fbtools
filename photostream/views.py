@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from fandjango.decorators import facebook_authorization_required
+from ajax import get_database_photos
 import time
 
 def get_photos_in_feed(feed):
@@ -45,7 +46,9 @@ def index(request):
     graph = request.facebook.user.graph
     friends = graph.get('me/friends')
     numfriends = len(friends['data'])
+    photos_html = get_database_photos(request)
     context = RequestContext(request, {
             'numfriends' : numfriends,
+            'photos' : photos_html,
     })
     return HttpResponse(template.render(context))

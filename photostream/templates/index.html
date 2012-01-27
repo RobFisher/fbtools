@@ -34,12 +34,14 @@ function update_friends_ids(data) {
 
 function update_photos(data) {
     element = $('#photos');
-    element.append(data.photos);
+    element.prepend(data.photos);
     friend_index = friend_index + 1;
     friends_to_go = friend_ids.length - friend_index;
     $('#numfriends').html(friends_to_go);
     if (friend_index < friend_ids.length) {
         Dajaxice.fbtools.photostream.fetch_friend_photos(Dajax.process,{'friend_id':friend_ids[friend_index]});
+    } else {
+        Dajaxice.fbtools.photostream.photo_scan_complete(Dajax.process);
     }
 }
 
@@ -50,14 +52,13 @@ $(document).ready(document_ready_function);
 
 <body>
 
-<p>Photos from your friends in the last 48 hours... <span id="numfriends">{{ numfriends }}</span> friends to go.</p>
-
-<input type="text" name="a" value="5" id="a"> x
-<input type="text" name="b" value="6" id="b"> =
-<input type="text" name="result" value="" id="result">
-<input type="button" name="caculate" value="Let's Multiply!" id="caculate" onclick="calculate()">
+<p>Updating photos since your last visit... <span id="numfriends">{{ numfriends }}</span> friends to go.</p>
 
 <div id='photos'></div>
+
+<p>+++</p>
+
+{% autoescape off %}{{ photos }}{% endautoescape %}
 
 </body>
 </html>
