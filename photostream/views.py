@@ -8,7 +8,7 @@ def get_photos_in_feed(feed):
     if 'data' in feed:
         for post in feed['data']:
             if post['type'] == 'photo':
-
+                pass
 
 def t_minus_two_days():
     return int(time.time()) - (6*24*60*60)
