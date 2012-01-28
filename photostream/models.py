@@ -6,6 +6,8 @@ class UserState(models.Model):
     current_retrieval_start = models.IntegerField()
     last_photo_retrieval = models.IntegerField()
     last_album_retrieval = models.IntegerField()
+    def __unicode__(self):
+        return fbuser.full_name
 
 
 class Photo(models.Model):
@@ -16,6 +18,8 @@ class Photo(models.Model):
     from_name = models.TextField()
     link = models.TextField()
     source = models.TextField()
+    def __unicode__(self):
+        return from_name + ' : ' + name
 
 
 class Album(models.Model):
@@ -24,4 +28,5 @@ class Album(models.Model):
     retrieval_time = models.IntegerField()
     name = models.TextField()
     link = models.TextField()
-    
+    def __unicode__(self):
+        return name
