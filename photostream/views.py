@@ -8,9 +8,6 @@ def get_photos_in_feed(feed):
     if 'data' in feed:
         for post in feed['data']:
             if post['type'] == 'photo':
-                print '****'
-                print post
-                print '****'
 
 
 def t_minus_two_days():

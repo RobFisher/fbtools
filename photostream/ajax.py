@@ -9,13 +9,11 @@ def get_user_state(user):
     user_state_list = UserState.objects.filter(fbuser=user)
     if len(user_state_list) > 0:
         user_state = user_state_list[0]
-        print 'using existing user'
     else:
         user_state = UserState(fbuser=user)
         user_state.current_retrieval_start = 0
         user_state.last_photo_retrieval = 0
         user_state.last_album_retrieval = 0
-        print 'creating new user'
         user_state.save()
     return user_state
 
@@ -61,10 +59,8 @@ def get_photo_html(photo):
 def get_database_photos(request):
     user_state = get_user_state(request.facebook.user)
     user_photos = Photo.objects.filter(user_state=user_state)
-    print 'user has ' + str(len(user_photos)) + ' photos'
     t = int(time.time()) - (48*60*60)
     recent_photos = user_photos.filter(retrieval_time__gte=t)
-    print 'user has ' + str(len(recent_photos)) + ' recent photos'
     html = ''
     for p in recent_photos:
         html += get_photo_html(p)
@@ -76,10 +72,8 @@ def get_photos_html(graph, feed, user_state):
     if feed['data']:
         for entry in feed['data']:
             if entry['type'] == 'photo':
-                print entry
                 try:
                    photo = graph.get('/' + entry['object_id'] + '?fields=from,name,source,link')
-                   print photo
                 except:
                     pass
                 else:
@@ -108,7 +102,6 @@ def fetch_friend_photos(request, friend_id):
     user_state = get_user_state(request.facebook.user)
     t_db = user_state.last_photo_retrieval
     if t_db > t:
-        print 'Only need to fetch recent photos from fb'
         t = t_db
     feed = None
     html = ''
