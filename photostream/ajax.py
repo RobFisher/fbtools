@@ -60,7 +60,7 @@ def get_database_photos(request):
     user_state = get_user_state(request.facebook.user)
     user_photos = Photo.objects.filter(user_state=user_state)
     t = int(time.time()) - (48*60*60)
-    recent_photos = user_photos.filter(retrieval_time__gte=t)
+    recent_photos = user_photos.filter(retrieval_time__gte=t).order_by('-retrieval_time')
     html = ''
     for p in recent_photos:
         html += get_photo_html(p)
