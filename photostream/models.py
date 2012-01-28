@@ -7,7 +7,7 @@ class UserState(models.Model):
     last_photo_retrieval = models.IntegerField()
     last_album_retrieval = models.IntegerField()
     def __unicode__(self):
-        return fbuser.full_name
+        return self.fbuser.full_name
 
 
 class Photo(models.Model):
@@ -19,7 +19,7 @@ class Photo(models.Model):
     link = models.TextField()
     source = models.TextField()
     def __unicode__(self):
-        return from_name + ' : ' + name
+        return self.from_name + ' : ' + self.name
 
 
 class Album(models.Model):
@@ -29,4 +29,4 @@ class Album(models.Model):
     name = models.TextField()
     link = models.TextField()
     def __unicode__(self):
-        return name
+        return self.name
